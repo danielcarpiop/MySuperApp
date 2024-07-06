@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3745CAC32C38635800C009EF /* URLSession+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3745CAC22C38635800C009EF /* URLSession+Networking.swift */; };
 		376D72F62C385FA300A1382C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D72F52C385FA300A1382C /* AppDelegate.swift */; };
 		376D72F82C385FA300A1382C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D72F72C385FA300A1382C /* SceneDelegate.swift */; };
-		376D72FA2C385FA300A1382C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D72F92C385FA300A1382C /* ViewController.swift */; };
 		376D72FD2C385FA300A1382C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 376D72FC2C385FA300A1382C /* Base */; };
 		376D73002C385FA300A1382C /* MySuperApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 376D72FE2C385FA300A1382C /* MySuperApp.xcdatamodeld */; };
 		376D73022C385FA400A1382C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 376D73012C385FA400A1382C /* Assets.xcassets */; };
@@ -17,6 +17,13 @@
 		376D73102C385FA400A1382C /* MySuperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D730F2C385FA400A1382C /* MySuperAppTests.swift */; };
 		376D731A2C385FA400A1382C /* MySuperAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D73192C385FA400A1382C /* MySuperAppUITests.swift */; };
 		376D731C2C385FA400A1382C /* MySuperAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D731B2C385FA400A1382C /* MySuperAppUITestsLaunchTests.swift */; };
+		37BD3C1E2C3864CD002C4A9F /* MySuperError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C1D2C3864CD002C4A9F /* MySuperError.swift */; };
+		37BD3C212C386732002C4A9F /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C202C386732002C4A9F /* Product.swift */; };
+		37BD3C242C386860002C4A9F /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C232C386860002C4A9F /* ProductService.swift */; };
+		37BD3C262C3868EC002C4A9F /* ProductAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C252C3868EC002C4A9F /* ProductAPI.swift */; };
+		37BD3C292C386C03002C4A9F /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C282C386C03002C4A9F /* HttpMethod.swift */; };
+		37BD3C2B2C386C64002C4A9F /* URLFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C2A2C386C64002C4A9F /* URLFactory.swift */; };
+		37BD3C2D2C386CE3002C4A9F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C2C2C386CE3002C4A9F /* Endpoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,10 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3745CAC22C38635800C009EF /* URLSession+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+Networking.swift"; sourceTree = "<group>"; };
 		376D72F22C385FA300A1382C /* MySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		376D72F52C385FA300A1382C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		376D72F72C385FA300A1382C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		376D72F92C385FA300A1382C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		376D72FC2C385FA300A1382C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		376D72FF2C385FA300A1382C /* MySuperApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MySuperApp.xcdatamodel; sourceTree = "<group>"; };
 		376D73012C385FA400A1382C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,6 +58,13 @@
 		376D73152C385FA400A1382C /* MySuperAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MySuperAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		376D73192C385FA400A1382C /* MySuperAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySuperAppUITests.swift; sourceTree = "<group>"; };
 		376D731B2C385FA400A1382C /* MySuperAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySuperAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		37BD3C1D2C3864CD002C4A9F /* MySuperError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySuperError.swift; sourceTree = "<group>"; };
+		37BD3C202C386732002C4A9F /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		37BD3C232C386860002C4A9F /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
+		37BD3C252C3868EC002C4A9F /* ProductAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAPI.swift; sourceTree = "<group>"; };
+		37BD3C282C386C03002C4A9F /* HttpMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		37BD3C2A2C386C64002C4A9F /* URLFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLFactory.swift; sourceTree = "<group>"; };
+		37BD3C2C2C386CE3002C4A9F /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +92,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3745CAC12C38622400C009EF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				37BD3C232C386860002C4A9F /* ProductService.swift */,
+				37BD3C252C3868EC002C4A9F /* ProductAPI.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3745CAC42C3863C500C009EF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3745CAC22C38635800C009EF /* URLSession+Networking.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		376D72E92C385FA300A1382C = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +132,13 @@
 		376D72F42C385FA300A1382C /* MySuperApp */ = {
 			isa = PBXGroup;
 			children = (
+				37BD3C272C386BCB002C4A9F /* Core */,
+				37BD3C1F2C38660E002C4A9F /* Models */,
+				3745CAC42C3863C500C009EF /* Extensions */,
+				3745CAC12C38622400C009EF /* Services */,
 				376D72F52C385FA300A1382C /* AppDelegate.swift */,
 				376D72F72C385FA300A1382C /* SceneDelegate.swift */,
-				376D72F92C385FA300A1382C /* ViewController.swift */,
+				37BD3C1D2C3864CD002C4A9F /* MySuperError.swift */,
 				376D72FB2C385FA300A1382C /* Main.storyboard */,
 				376D73012C385FA400A1382C /* Assets.xcassets */,
 				376D73032C385FA400A1382C /* LaunchScreen.storyboard */,
@@ -128,6 +163,32 @@
 				376D731B2C385FA400A1382C /* MySuperAppUITestsLaunchTests.swift */,
 			);
 			path = MySuperAppUITests;
+			sourceTree = "<group>";
+		};
+		37BD3C1F2C38660E002C4A9F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				37BD3C202C386732002C4A9F /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		37BD3C222C38683C002C4A9F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				37BD3C282C386C03002C4A9F /* HttpMethod.swift */,
+				37BD3C2A2C386C64002C4A9F /* URLFactory.swift */,
+				37BD3C2C2C386CE3002C4A9F /* Endpoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		37BD3C272C386BCB002C4A9F /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				37BD3C222C38683C002C4A9F /* Network */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +322,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				376D72FA2C385FA300A1382C /* ViewController.swift in Sources */,
+				37BD3C1E2C3864CD002C4A9F /* MySuperError.swift in Sources */,
+				3745CAC32C38635800C009EF /* URLSession+Networking.swift in Sources */,
+				37BD3C292C386C03002C4A9F /* HttpMethod.swift in Sources */,
+				37BD3C212C386732002C4A9F /* Product.swift in Sources */,
 				376D73002C385FA300A1382C /* MySuperApp.xcdatamodeld in Sources */,
+				37BD3C242C386860002C4A9F /* ProductService.swift in Sources */,
+				37BD3C262C3868EC002C4A9F /* ProductAPI.swift in Sources */,
 				376D72F62C385FA300A1382C /* AppDelegate.swift in Sources */,
+				37BD3C2B2C386C64002C4A9F /* URLFactory.swift in Sources */,
+				37BD3C2D2C386CE3002C4A9F /* Endpoint.swift in Sources */,
 				376D72F82C385FA300A1382C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
