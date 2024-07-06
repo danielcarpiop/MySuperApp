@@ -2,26 +2,28 @@ import UIKit
 
 class TabBarCoordinator: NSObject {
     var tabBarController: UITabBarController
-    var productsViewController: ProductsViewController
+    var homeViewController: HomeViewController
     var cartViewController: CartViewController
-    
-    override init() {
+
+    init(homeViewModel: HomeViewModel, cartViewController: CartViewController) {
         self.tabBarController = UITabBarController()
-        self.productsViewController = ProductsViewController()
-        self.cartViewController = CartViewController()
-        
+        self.homeViewController = HomeViewController()
+        self.homeViewController.viewModel = homeViewModel
+        self.cartViewController = cartViewController
+
         super.init()
-        
+
         setupTabBar()
     }
-    
+
     private func setupTabBar() {
-        productsViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
+        homeViewController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(systemName: "house"), tag: 0)
         cartViewController.tabBarItem = UITabBarItem(title: "Cart", image: UIImage(systemName: "cart"), tag: 1)
-        
+
         tabBarController.viewControllers = [
-            UINavigationController(rootViewController: productsViewController),
+            UINavigationController(rootViewController: homeViewController),
             UINavigationController(rootViewController: cartViewController)
         ]
     }
 }
+

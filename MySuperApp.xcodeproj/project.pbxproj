@@ -26,9 +26,12 @@
 		37BD3C2D2C386CE3002C4A9F /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C2C2C386CE3002C4A9F /* Endpoint.swift */; };
 		37BD3C302C38D8DB002C4A9F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C2F2C38D8DB002C4A9F /* AppCoordinator.swift */; };
 		37BD3C322C38D8F7002C4A9F /* TabbarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C312C38D8F7002C4A9F /* TabbarCoordinator.swift */; };
-		37BD3C372C38DA9E002C4A9F /* ProductsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C362C38DA9E002C4A9F /* ProductsViewController.swift */; };
+		37BD3C372C38DA9E002C4A9F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C362C38DA9E002C4A9F /* HomeViewController.swift */; };
 		37BD3C392C38DB42002C4A9F /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C382C38DB42002C4A9F /* CartViewController.swift */; };
 		37BD3C3B2C38E036002C4A9F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C3A2C38E036002C4A9F /* BaseViewController.swift */; };
+		37BD3C3D2C396833002C4A9F /* FeaturedProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C3C2C396833002C4A9F /* FeaturedProductCell.swift */; };
+		37BD3C402C39734E002C4A9F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C3F2C39734E002C4A9F /* HomeViewModel.swift */; };
+		37BD3C422C397772002C4A9F /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C412C397772002C4A9F /* ProductCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,9 +75,12 @@
 		37BD3C2C2C386CE3002C4A9F /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		37BD3C2F2C38D8DB002C4A9F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		37BD3C312C38D8F7002C4A9F /* TabbarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarCoordinator.swift; sourceTree = "<group>"; };
-		37BD3C362C38DA9E002C4A9F /* ProductsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsViewController.swift; sourceTree = "<group>"; };
+		37BD3C362C38DA9E002C4A9F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		37BD3C382C38DB42002C4A9F /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		37BD3C3A2C38E036002C4A9F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		37BD3C3C2C396833002C4A9F /* FeaturedProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedProductCell.swift; sourceTree = "<group>"; };
+		37BD3C3F2C39734E002C4A9F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		37BD3C412C397772002C4A9F /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 		376D72F42C385FA300A1382C /* MySuperApp */ = {
 			isa = PBXGroup;
 			children = (
+				37BD3C3E2C397332002C4A9F /* ViewModels */,
 				37BD3C332C38D97F002C4A9F /* Views */,
 				37BD3C2E2C38D8C9002C4A9F /* Coordinators */,
 				37BD3C272C386BCB002C4A9F /* Core */,
@@ -216,26 +223,36 @@
 			isa = PBXGroup;
 			children = (
 				37BD3C352C38D999002C4A9F /* ViewControllers */,
-				37BD3C342C38D98A002C4A9F /* Cells */,
+				37BD3C342C38D98A002C4A9F /* Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
 		};
-		37BD3C342C38D98A002C4A9F /* Cells */ = {
+		37BD3C342C38D98A002C4A9F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				37BD3C3C2C396833002C4A9F /* FeaturedProductCell.swift */,
+				37BD3C412C397772002C4A9F /* ProductCell.swift */,
 			);
-			path = Cells;
+			path = Components;
 			sourceTree = "<group>";
 		};
 		37BD3C352C38D999002C4A9F /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				37BD3C362C38DA9E002C4A9F /* ProductsViewController.swift */,
+				37BD3C362C38DA9E002C4A9F /* HomeViewController.swift */,
 				37BD3C382C38DB42002C4A9F /* CartViewController.swift */,
 				37BD3C3A2C38E036002C4A9F /* BaseViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		37BD3C3E2C397332002C4A9F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				37BD3C3F2C39734E002C4A9F /* HomeViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,8 +387,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37BD3C302C38D8DB002C4A9F /* AppCoordinator.swift in Sources */,
+				37BD3C402C39734E002C4A9F /* HomeViewModel.swift in Sources */,
 				37BD3C1E2C3864CD002C4A9F /* MySuperError.swift in Sources */,
-				37BD3C372C38DA9E002C4A9F /* ProductsViewController.swift in Sources */,
+				37BD3C372C38DA9E002C4A9F /* HomeViewController.swift in Sources */,
 				3745CAC32C38635800C009EF /* URLSession+Networking.swift in Sources */,
 				37BD3C292C386C03002C4A9F /* HttpMethod.swift in Sources */,
 				37BD3C212C386732002C4A9F /* Product.swift in Sources */,
@@ -384,7 +402,9 @@
 				37BD3C2D2C386CE3002C4A9F /* Endpoint.swift in Sources */,
 				37BD3C3B2C38E036002C4A9F /* BaseViewController.swift in Sources */,
 				37BD3C322C38D8F7002C4A9F /* TabbarCoordinator.swift in Sources */,
+				37BD3C422C397772002C4A9F /* ProductCell.swift in Sources */,
 				376D72F82C385FA300A1382C /* SceneDelegate.swift in Sources */,
+				37BD3C3D2C396833002C4A9F /* FeaturedProductCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
