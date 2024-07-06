@@ -1,23 +1,77 @@
 import UIKit
 import Combine
 
-class HomeViewController: BaseViewController {
+class HomeViewController: UIViewController {
     private var collectionView: UICollectionView?
     var viewModel: HomeViewModel?
+    var coordinator: HomeCoordinator?
     private var cancellables = Set<AnyCancellable>()
+    
+    private let customNavigationBar: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "My Super App"
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.textAlignment = .left
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let dotsCircle: UIButton = {
+        let button = UIButton(type: .custom)
+        let iconImage = UIImage(systemName: "ellipsis.circle")?.withRenderingMode(.alwaysOriginal)
+        button.setImage(iconImage, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.imageView?.contentMode = .scaleAspectFit
+        button.clipsToBounds = true
+        button.backgroundColor = .clear
+        return button
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        
+        setupCustomNavigationBar()
         setupCollectionView()
         bindViewModel()
         
         viewModel?.fetchProducts()
+        
+        dotsCircle.addTarget(self, action: #selector(viewCategories), for: .touchUpInside)
+    }
+    
+    private func setupCustomNavigationBar() {
+        view.addSubview(customNavigationBar)
+        customNavigationBar.addSubview(titleLabel)
+        customNavigationBar.addSubview(dotsCircle)
+        
+        NSLayoutConstraint.activate([
+            customNavigationBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            customNavigationBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            customNavigationBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            customNavigationBar.heightAnchor.constraint(equalToConstant: 50),
+            
+            titleLabel.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: customNavigationBar.leadingAnchor, constant: 16),
+            
+            dotsCircle.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
+            dotsCircle.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
+            dotsCircle.widthAnchor.constraint(equalToConstant: 35),
+            dotsCircle.heightAnchor.constraint(equalToConstant: 35)
+        ])
     }
     
     private func setupCollectionView() {
         let layout = createLayout()
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.identifier)
@@ -25,6 +79,13 @@ class HomeViewController: BaseViewController {
         
         if let collectionView = collectionView {
             view.addSubview(collectionView)
+            collectionView.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                collectionView.topAnchor.constraint(equalTo: customNavigationBar.bottomAnchor),
+                collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
         }
     }
     
@@ -67,6 +128,10 @@ class HomeViewController: BaseViewController {
         }
         
         return layout
+    }
+    
+    @objc private func viewCategories() {
+        coordinator?.showCategories()
     }
 }
 

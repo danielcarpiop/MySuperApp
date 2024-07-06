@@ -2,23 +2,19 @@ import Foundation
 
 class URLFactory {
     static let shared = URLFactory()
-
+    
     private var baseURL: String {
-            return "https://fakestoreapi.com"
+        return "https://fakestoreapi.com"
     }
-
+    
     private func url(for endpoint: Endpoint) -> URL {
-        var stringURL = baseURL
-        switch endpoint {
-        case .product:
-            stringURL += String(format: endpoint.rawValue)
-        }
+        let stringURL = baseURL + endpoint.rawValue
         guard let url = URL(string: stringURL) else {
-            fatalError("Could not construct URL for Endpont: \(endpoint)")
+            fatalError("Could not construct URL for Endpoint: \(endpoint)")
         }
         return url
     }
-
+    
     func request(
         for endpoint: Endpoint,
         method: HttpMethod = .get,

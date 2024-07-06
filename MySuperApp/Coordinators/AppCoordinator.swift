@@ -2,7 +2,7 @@ import UIKit
 
 class AppCoordinator {
     private let window: UIWindow
-    private var tabBarCoordinator: TabBarCoordinator?
+    private var homeCoordinator: HomeCoordinator?
 
     init(window: UIWindow) {
         self.window = window
@@ -10,15 +10,13 @@ class AppCoordinator {
 
     func start() {
         let productService = ProductAPI()
-        let homeViewModel = HomeViewModel(productService: productService)
-        let cartViewController = CartViewController()
-
-        tabBarCoordinator = TabBarCoordinator(homeViewModel: homeViewModel, cartViewController: cartViewController)
-
-        if let tabBarCoordinator = tabBarCoordinator {
-            window.rootViewController = tabBarCoordinator.tabBarController
-            window.makeKeyAndVisible()
-        }
+        let navigationController = UINavigationController()
+        navigationController.setNavigationBarHidden(true, animated: false)
+        
+        homeCoordinator = HomeCoordinator(navigationController: navigationController, productService: productService)
+        homeCoordinator?.start()
+        
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
 }
-
