@@ -18,6 +18,7 @@ struct Product: Codable, Equatable {
     let category: Category
     let image: String
     let rating: Rating
+    var quantity: Int?
 }
 
 enum Category: String, Codable {

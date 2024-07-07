@@ -24,12 +24,14 @@ class HomeViewController: UIViewController {
     }()
     
     private let dotsCircle: UIButton = {
-        let button = UIButton(type: .custom)
-        let iconImage = UIImage(systemName: "ellipsis.circle")?.withRenderingMode(.alwaysOriginal)
-        button.setImage(iconImage, for: .normal)
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "ellipsis.circle")
+        configuration.imagePadding = 8
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        configuration.baseForegroundColor = .systemBlue
+
+        let button = UIButton(configuration: configuration, primaryAction: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.imageView?.contentMode = .scaleAspectFit
-        button.clipsToBounds = true
         button.backgroundColor = .clear
         return button
     }()
@@ -62,9 +64,9 @@ class HomeViewController: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: customNavigationBar.leadingAnchor, constant: 16),
             
             dotsCircle.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
-            dotsCircle.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
-            dotsCircle.widthAnchor.constraint(equalToConstant: 35),
-            dotsCircle.heightAnchor.constraint(equalToConstant: 35)
+                   dotsCircle.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
+                   dotsCircle.widthAnchor.constraint(equalToConstant: 35),
+                   dotsCircle.heightAnchor.constraint(equalToConstant: 35)
         ])
     }
     
@@ -165,5 +167,18 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             return cell
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let selectedProduct: Product = {
+            if indexPath.section == 0 {
+                return viewModel?.products.first
+            } else {
+                return viewModel?.products[indexPath.item + 1]
+            }
+        }() else {
+            return
+        }
+        coordinator?.showProductDetail(product: selectedProduct)
     }
 }
