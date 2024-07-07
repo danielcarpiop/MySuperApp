@@ -12,7 +12,7 @@ enum Endpoint {
         case .categories:
             return "/products/categories"
         case .category(let category):
-            return "/products/categories\(category)"
+            return "/products/category/\(category)"
         }
     }
 }

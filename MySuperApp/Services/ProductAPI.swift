@@ -12,8 +12,13 @@ class ProductAPI: ProductService {
         return URLSession.shared.execute(request, with: decoder)
     }
     
-    func getCategories() -> AnyPublisher<[Category], MySuperError> {
+    func getCategories() -> AnyPublisher<[String], MySuperError> {
         let request = URLFactory.shared.request(for: .categories)
+        return URLSession.shared.execute(request, with: decoder)
+    }
+    
+    func getCategory(category: String) -> AnyPublisher<[Product], MySuperError> {
+        let request = URLFactory.shared.request(for: .category(category))
         return URLSession.shared.execute(request, with: decoder)
     }
 }

@@ -11,7 +11,7 @@
 		376D72F62C385FA300A1382C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D72F52C385FA300A1382C /* AppDelegate.swift */; };
 		376D72F82C385FA300A1382C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D72F72C385FA300A1382C /* SceneDelegate.swift */; };
 		376D72FD2C385FA300A1382C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 376D72FC2C385FA300A1382C /* Base */; };
-		376D73002C385FA300A1382C /* MySuperApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 376D72FE2C385FA300A1382C /* MySuperApp.xcdatamodeld */; };
+		376D73002C385FA300A1382C /* CartModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 376D72FE2C385FA300A1382C /* CartModel.xcdatamodeld */; };
 		376D73022C385FA400A1382C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 376D73012C385FA400A1382C /* Assets.xcassets */; };
 		376D73052C385FA400A1382C /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 376D73042C385FA400A1382C /* Base */; };
 		376D73102C385FA400A1382C /* MySuperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376D730F2C385FA400A1382C /* MySuperAppTests.swift */; };
@@ -41,6 +41,7 @@
 		37BD3C522C3A491F002C4A9F /* ProductDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C512C3A491F002C4A9F /* ProductDetailCoordinator.swift */; };
 		37BD3C542C3A60DF002C4A9F /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C532C3A60DF002C4A9F /* CartViewModel.swift */; };
 		37BD3C562C3A612F002C4A9F /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C552C3A612F002C4A9F /* CartItemCell.swift */; };
+		37BD3C582C3AC5D0002C4A9F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BD3C572C3AC5D0002C4A9F /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		37BD3C512C3A491F002C4A9F /* ProductDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailCoordinator.swift; sourceTree = "<group>"; };
 		37BD3C532C3A60DF002C4A9F /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		37BD3C552C3A612F002C4A9F /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
+		37BD3C572C3AC5D0002C4A9F /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,7 +182,8 @@
 				376D73012C385FA400A1382C /* Assets.xcassets */,
 				376D73032C385FA400A1382C /* LaunchScreen.storyboard */,
 				376D73062C385FA400A1382C /* Info.plist */,
-				376D72FE2C385FA300A1382C /* MySuperApp.xcdatamodeld */,
+				376D72FE2C385FA300A1382C /* CartModel.xcdatamodeld */,
+				37BD3C572C3AC5D0002C4A9F /* CoreDataManager.swift */,
 			);
 			path = MySuperApp;
 			sourceTree = "<group>";
@@ -425,7 +428,7 @@
 				37BD3C4A2C3A125C002C4A9F /* CartCoordinator.swift in Sources */,
 				37BD3C292C386C03002C4A9F /* HttpMethod.swift in Sources */,
 				37BD3C212C386732002C4A9F /* Product.swift in Sources */,
-				376D73002C385FA300A1382C /* MySuperApp.xcdatamodeld in Sources */,
+				376D73002C385FA300A1382C /* CartModel.xcdatamodeld in Sources */,
 				37BD3C392C38DB42002C4A9F /* CartViewController.swift in Sources */,
 				37BD3C482C39F410002C4A9F /* CategoriesViewModel.swift in Sources */,
 				37BD3C242C386860002C4A9F /* ProductService.swift in Sources */,
@@ -438,6 +441,7 @@
 				37BD3C322C38D8F7002C4A9F /* TabBarCoordinator.swift in Sources */,
 				37BD3C522C3A491F002C4A9F /* ProductDetailCoordinator.swift in Sources */,
 				37BD3C422C397772002C4A9F /* ProductCell.swift in Sources */,
+				37BD3C582C3AC5D0002C4A9F /* CoreDataManager.swift in Sources */,
 				376D72F82C385FA300A1382C /* SceneDelegate.swift in Sources */,
 				37BD3C502C3A48B6002C4A9F /* ProductDetailViewModel.swift in Sources */,
 				37BD3C3D2C396833002C4A9F /* FeaturedProductCell.swift in Sources */,
@@ -789,13 +793,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		376D72FE2C385FA300A1382C /* MySuperApp.xcdatamodeld */ = {
+		376D72FE2C385FA300A1382C /* CartModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				376D72FF2C385FA300A1382C /* MySuperApp.xcdatamodel */,
 			);
 			currentVersion = 376D72FF2C385FA300A1382C /* MySuperApp.xcdatamodel */;
-			path = MySuperApp.xcdatamodeld;
+			path = CartModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -9,7 +9,7 @@ class HomeCoordinator {
         let productService = ProductAPI()
         let homeViewModel = HomeViewModel(productService: productService)
         homeViewController = HomeViewController()
-        homeViewController.coordinator = self
+        homeViewController.delegate = self
         homeViewController.viewModel = homeViewModel
         navigationController.setNavigationBarHidden(true, animated: false)
     }
@@ -17,9 +17,12 @@ class HomeCoordinator {
     func start() {
         navigationController.pushViewController(homeViewController, animated: true)
     }
-    
-    func showCategories() {
+}
+
+extension HomeCoordinator: HomeVCDelegate {
+    func goToProductCategories() {
         let categoriesCoordinator = CategoriesCoordinator(navigationController: navigationController)
+        categoriesCoordinator.delegate = self
         categoriesCoordinator.start()
     }
     
@@ -41,4 +44,13 @@ class HomeCoordinator {
         productDetailViewController.modalPresentationStyle = .pageSheet
         navigationController.present(productDetailViewController, animated: true, completion: nil)
     }
+    
+}
+
+extension HomeCoordinator: CategoriesCoordinatorDelegate {
+    func filterCategory(category: String) {
+        homeViewController.filterCategory(category: category)
+    }
+    
+    
 }

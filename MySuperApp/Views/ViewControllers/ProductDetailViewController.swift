@@ -73,6 +73,7 @@ class ProductDetailViewController: UIViewController {
         updatePreferredContentSize()
         
         dismissButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -166,4 +167,8 @@ class ProductDetailViewController: UIViewController {
     @objc private func dismissView() {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func addToCart() {
+           viewModel?.addToCart()
+       }
 }

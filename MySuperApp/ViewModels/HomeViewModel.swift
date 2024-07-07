@@ -27,6 +27,24 @@ class HomeViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
+    func filterCategory(category: String) {
+        productService.getCategory(category: category)
+            .compactMap { [weak self] products in
+                self?.determineFeaturedProduct(from: products)
+            }
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure(let error):
+                    print("Error fetching products: \(error)")
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] products in
+                self?.products = products
+            })
+            .store(in: &cancellables)
+    }
+    
     private func determineFeaturedProduct(from products: [Product]) -> [Product] {
         guard !products.isEmpty else { return [] }
         
@@ -40,3 +58,5 @@ class HomeViewModel: ObservableObject {
         return orderedProducts
     }
 }
+
+

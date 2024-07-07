@@ -1,7 +1,13 @@
 import UIKit
 import Combine
 
+protocol CategoryVCDelegate: AnyObject {
+    func filterCategory(category: String)
+}
+
 class CategoriesViewController: UIViewController {
+    var delegate: CategoryVCDelegate?
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Categories"
@@ -89,7 +95,12 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = viewModel?.categories[indexPath.row].rawValue
+        cell.textLabel?.text = viewModel?.categories[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.filterCategory(category: viewModel?.categories[indexPath.row] ?? "")
+        dismiss(animated: true)
     }
 }

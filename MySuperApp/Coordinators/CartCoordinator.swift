@@ -6,7 +6,8 @@ class CartCoordinator {
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        cartViewController = CartViewController()
+        let viewModel = CartViewModel()
+        cartViewController = CartViewController(viewModel: viewModel)
     }
     
     func start() {

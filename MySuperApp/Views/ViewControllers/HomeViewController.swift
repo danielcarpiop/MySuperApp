@@ -1,10 +1,17 @@
 import UIKit
 import Combine
 
+protocol HomeVCDelegate: AnyObject {
+    func goToProductCategories()
+    func showProductDetail(product: Product)
+}
+
+
+
 class HomeViewController: UIViewController {
+    var delegate: HomeVCDelegate?
     private var collectionView: UICollectionView?
     var viewModel: HomeViewModel?
-    var coordinator: HomeCoordinator?
     private var cancellables = Set<AnyCancellable>()
     
     private let customNavigationBar: UIView = {
@@ -132,7 +139,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc private func viewCategories() {
-        coordinator?.showCategories()
+        delegate?.goToProductCategories()
     }
 }
 
@@ -179,6 +186,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }() else {
             return
         }
-        coordinator?.showProductDetail(product: selectedProduct)
+        delegate?.showProductDetail(product: selectedProduct)
+    }
+}
+
+extension HomeViewController {
+    func filterCategory(category: String) {
+        viewModel?.filterCategory(category: category)
     }
 }

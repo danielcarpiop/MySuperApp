@@ -3,7 +3,7 @@ import Combine
 
 class CategoriesViewModel {
     private let productService: ProductAPI
-    @Published var categories: [Category] = []
+    @Published var categories: [String] = []
     private var cancellables = Set<AnyCancellable>()
     
     init(productService: ProductAPI) {

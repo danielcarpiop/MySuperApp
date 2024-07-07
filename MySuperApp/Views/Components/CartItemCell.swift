@@ -1,4 +1,5 @@
 import UIKit
+import Combine
 
 class CartItemCell: UITableViewCell {
     static let identifier = "CartItemCell"
@@ -13,6 +14,7 @@ class CartItemCell: UITableViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -20,18 +22,27 @@ class CartItemCell: UITableViewCell {
     private let priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private let removeButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Quitar", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .red
+        button.setTitle("Remove", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 10
+        button.layer.borderColor = UIColor.black.cgColor
+        button.layer.borderWidth = 1
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    
+    private let countControlView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private let decrementButton: UIButton = {
@@ -55,19 +66,20 @@ class CartItemCell: UITableViewCell {
     private let quantityLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
-        label.text = "1"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    var onRemove: (() -> Void)?
-    var onIncrement: (() -> Void)?
-    var onDecrement: (() -> Void)?
+    var removeSubject = PassthroughSubject<Void, Never>()
+    var incrementSubject = PassthroughSubject<Void, Never>()
+    var decrementSubject = PassthroughSubject<Void, Never>()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
         addActions()
+        contentView.layer.borderColor = UIColor.black.cgColor
+        contentView.layer.borderWidth = 1
     }
     
     required init?(coder: NSCoder) {
@@ -79,39 +91,45 @@ class CartItemCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
         contentView.addSubview(removeButton)
-        contentView.addSubview(decrementButton)
-        contentView.addSubview(quantityLabel)
-        contentView.addSubview(incrementButton)
+        contentView.addSubview(countControlView)
+        countControlView.addSubview(decrementButton)
+        countControlView.addSubview(quantityLabel)
+        countControlView.addSubview(incrementButton)
         
         NSLayoutConstraint.activate([
+            productImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            productImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             productImageView.widthAnchor.constraint(equalToConstant: 80),
             productImageView.heightAnchor.constraint(equalToConstant: 80),
             
-            titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.trailingAnchor.constraint(equalTo: removeButton.leadingAnchor, constant: -8),
+            titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 8),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            priceLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
-            priceLabel.trailingAnchor.constraint(equalTo: removeButton.leadingAnchor, constant: -8),
+            priceLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
+            priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            removeButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            removeButton.widthAnchor.constraint(equalToConstant: 80),
+            removeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 12),
+            removeButton.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 20),
+            removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             removeButton.heightAnchor.constraint(equalToConstant: 30),
             
-            decrementButton.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
-            decrementButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
+            countControlView.topAnchor.constraint(equalTo: removeButton.bottomAnchor, constant: 20),
+            countControlView.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 12),
+            countControlView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            countControlView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            
+            decrementButton.leadingAnchor.constraint(equalTo: countControlView.leadingAnchor),
+            decrementButton.centerYAnchor.constraint(equalTo: countControlView.centerYAnchor),
             decrementButton.widthAnchor.constraint(equalToConstant: 30),
             decrementButton.heightAnchor.constraint(equalToConstant: 30),
             
-            quantityLabel.centerYAnchor.constraint(equalTo: decrementButton.centerYAnchor),
+            quantityLabel.centerYAnchor.constraint(equalTo: countControlView.centerYAnchor),
             quantityLabel.leadingAnchor.constraint(equalTo: decrementButton.trailingAnchor, constant: 8),
-            
-            incrementButton.centerYAnchor.constraint(equalTo: decrementButton.centerYAnchor),
+        
             incrementButton.leadingAnchor.constraint(equalTo: quantityLabel.trailingAnchor, constant: 8),
+            incrementButton.centerYAnchor.constraint(equalTo: countControlView.centerYAnchor),
             incrementButton.widthAnchor.constraint(equalToConstant: 30),
             incrementButton.heightAnchor.constraint(equalToConstant: 30)
         ])
@@ -124,26 +142,29 @@ class CartItemCell: UITableViewCell {
     }
     
     @objc private func removeButtonTapped() {
-        onRemove?()
+        removeSubject.send(())
     }
     
     @objc private func incrementButtonTapped() {
-        onIncrement?()
+        incrementSubject.send(())
     }
     
     @objc private func decrementButtonTapped() {
-        onDecrement?()
+        decrementSubject.send(())
     }
     
     func configure(with product: Product) {
         titleLabel.text = product.title
         priceLabel.text = "$\(product.price)"
-        quantityLabel.text = "\(product.quantity)"
+//        titleLabel.text = "product.title"
+//        priceLabel.text = "$2.500CLP"
+//        quantityLabel.text = "1"
         if let url = URL(string: product.image) {
             loadImage(from: url, into: productImageView)
         }
     }
     
     private func loadImage(from url: URL, into imageView: UIImageView) {
+       
     }
 }
