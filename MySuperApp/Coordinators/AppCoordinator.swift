@@ -1,22 +1,14 @@
 import UIKit
 
 class AppCoordinator {
-    private let window: UIWindow
-    private var homeCoordinator: HomeCoordinator?
+    private var navigationController: UINavigationController
 
-    init(window: UIWindow) {
-        self.window = window
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 
     func start() {
-        let productService = ProductAPI()
-        let navigationController = UINavigationController()
-        navigationController.setNavigationBarHidden(true, animated: false)
-        
-        homeCoordinator = HomeCoordinator(navigationController: navigationController, productService: productService)
-        homeCoordinator?.start()
-        
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        let tabCoordinator = TabBarCoordinator(navigationController: navigationController)
+        tabCoordinator.start()
     }
 }

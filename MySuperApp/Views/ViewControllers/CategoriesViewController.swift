@@ -26,7 +26,7 @@ class CategoriesViewController: UIViewController {
         return tableView
     }()
     
-    var viewModel: CategoriesViewModel!
+    var viewModel: CategoriesViewModel?
     private var cancellables = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -39,11 +39,12 @@ class CategoriesViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CategoryCell")
+        tableView.backgroundColor = .clear
         
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         
         bindViewModel()
-        viewModel.fetchCategories()
+        viewModel?.fetchCategories()
     }
     
     private func setupViews() {
@@ -72,7 +73,7 @@ class CategoriesViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewModel.$categories
+        viewModel?.$categories
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.tableView.reloadData()
@@ -83,12 +84,12 @@ class CategoriesViewController: UIViewController {
 
 extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.categories.count
+        return viewModel?.categories.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = viewModel.categories[indexPath.row].rawValue
+        cell.textLabel?.text = viewModel?.categories[indexPath.row].rawValue
         return cell
     }
 }
