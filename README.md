@@ -30,7 +30,7 @@ MySuperApp is an iOS application designed to showcase a collection of products w
    ```bash
    git clone https://github.com/danielcarpiop/MySuperApp.git
    cd MySuperApp
-      ```
+   ```
       
 ## Open the Project in Xcode
 
