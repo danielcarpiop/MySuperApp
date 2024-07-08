@@ -4,12 +4,17 @@ import CoreData
 
 class CartViewModel: ObservableObject {
     @Published var products: [Product] = []
-    @Published var totalAmount: Double = 0.0
+    @Published var totalAmount: String = "0.00"
     var cartItems: [CartItem] = []
     
     private var cancellables = Set<AnyCancellable>()
+    private let numberFormatter: NumberFormatter
     
     init() {
+        numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
         fetchCartItems()
     }
     
@@ -46,6 +51,7 @@ class CartViewModel: ObservableObject {
     }
     
     private func recalculateTotalAmount() {
-        totalAmount = products.reduce(0) { $0 + ($1.price * Double($1.quantity ?? 0)) }
+        let total = products.reduce(0.0) { $0 + ($1.price * Double($1.quantity ?? 0)) }
+        totalAmount = numberFormatter.string(from: NSNumber(value: total)) ?? "0.00"
     }
 }

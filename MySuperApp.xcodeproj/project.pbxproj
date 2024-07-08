@@ -180,6 +180,7 @@
 		376D72F42C385FA300A1382C /* MySuperApp */ = {
 			isa = PBXGroup;
 			children = (
+				37C19B1F2C3BD0D500BDB68B /* Utilities */,
 				37C19B102C3B671100BDB68B /* Enums */,
 				37BD3C3E2C397332002C4A9F /* ViewModels */,
 				37BD3C332C38D97F002C4A9F /* Views */,
@@ -306,6 +307,13 @@
 				37C19B112C3B673400BDB68B /* CategoriesEnum.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		37C19B1F2C3BD0D500BDB68B /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

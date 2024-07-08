@@ -34,7 +34,7 @@ class HomeViewController: UIViewController {
         configuration.imagePadding = 8
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
         configuration.baseForegroundColor = .systemBlue
-
+        
         let button = UIButton(configuration: configuration, primaryAction: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
@@ -69,9 +69,9 @@ class HomeViewController: UIViewController {
             titleLabel.leadingAnchor.constraint(equalTo: customNavigationBar.leadingAnchor, constant: 16),
             
             dotsCircle.centerYAnchor.constraint(equalTo: customNavigationBar.centerYAnchor),
-                   dotsCircle.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
-                   dotsCircle.widthAnchor.constraint(equalToConstant: 35),
-                   dotsCircle.heightAnchor.constraint(equalToConstant: 35)
+            dotsCircle.trailingAnchor.constraint(equalTo: customNavigationBar.trailingAnchor, constant: -16),
+            dotsCircle.widthAnchor.constraint(equalToConstant: 35),
+            dotsCircle.heightAnchor.constraint(equalToConstant: 35)
         ])
     }
     
@@ -82,6 +82,8 @@ class HomeViewController: UIViewController {
         collectionView?.dataSource = self
         collectionView?.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.identifier)
         collectionView?.register(FeaturedCell.self, forCellWithReuseIdentifier: FeaturedCell.identifier)
+        
+        collectionView?.showsVerticalScrollIndicator = false
         
         if let collectionView = collectionView {
             view.addSubview(collectionView)
@@ -128,7 +130,7 @@ class HomeViewController: UIViewController {
             }
             
             section.interGroupSpacing = 10
-            section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 10, trailing: 20)
             
             return section
         }
@@ -202,6 +204,6 @@ extension HomeViewController {
         case .category(let name):
             viewModel?.filterCategory(category: name)
         }
-       
+        
     }
 }

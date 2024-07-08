@@ -11,7 +11,6 @@ class HomeCoordinator {
         homeViewController = HomeViewController()
         homeViewController.delegate = self
         homeViewController.viewModel = homeViewModel
-        navigationController.setNavigationBarHidden(true, animated: false)
     }
     
     func start() {
@@ -41,7 +40,7 @@ extension HomeCoordinator: HomeVCDelegate {
             sheet.preferredCornerRadius = 15
         }
         
-        productDetailViewController.modalPresentationStyle = .pageSheet
+        productDetailViewController.modalPresentationStyle = .custom
         navigationController.present(productDetailViewController, animated: true, completion: nil)
     }
     
@@ -51,6 +50,4 @@ extension HomeCoordinator: CategoriesCoordinatorDelegate {
     func filterCategory(category: CategoriesEnum) {
         homeViewController.filterCategory(category: category)
     }
-    
-    
 }

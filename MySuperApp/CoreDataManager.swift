@@ -49,7 +49,7 @@ class CoreDataManager {
                 updateCartItem(cartItem: item, quantity: item.quantity - 1)
             }
         } else {
-            cartItem.itemId = Int64(product.id)
+            cartItem.itemId = Int16(product.id)
             cartItem.title = product.title
             cartItem.price = product.price
             cartItem.quantity = 1
@@ -57,7 +57,7 @@ class CoreDataManager {
             cartItem.category = product.category
             cartItem.image = product.image
             cartItem.rate = product.rating.rate
-            cartItem.count = Int64(product.rating.count)
+            cartItem.count = Int16(product.rating.count)
             saveContext()
         }
     }
@@ -68,7 +68,7 @@ class CoreDataManager {
         saveContext()
     }
 
-    func updateCartItem(cartItem: CartItem, quantity: Int64) {
+    func updateCartItem(cartItem: CartItem, quantity: Int16) {
         cartItem.quantity = quantity
         saveContext()
     }

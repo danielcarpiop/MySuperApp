@@ -12,7 +12,7 @@ class FeaturedCell: UICollectionViewCell {
     
     private let featuredLabel: UILabel = {
         let label = UILabel()
-        label.text = "Destacado"
+        label.text = "Feature"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -33,10 +33,15 @@ class FeaturedCell: UICollectionViewCell {
     }()
     
     private let addToCartButton: UIButton = {
-        let button = UIButton()
-        let icon = UIImage(systemName: "plus.circle")
-        button.setImage(icon, for: .normal)
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "plus.circle")
+        configuration.imagePadding = 8
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+        configuration.baseForegroundColor = .systemBlue
+        
+        let button = UIButton(configuration: configuration, primaryAction: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
         return button
     }()
     
@@ -46,7 +51,6 @@ class FeaturedCell: UICollectionViewCell {
         super.init(frame: frame)
         addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         setupCell()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -65,13 +69,13 @@ class FeaturedCell: UICollectionViewCell {
         contentView.addSubview(addToCartButton)
         
         NSLayoutConstraint.activate([
-            productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            productImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            productImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            productImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.3),
+            productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            productImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            productImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            productImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.5),
             
             featuredLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 8),
-            featuredLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            featuredLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             featuredLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
             titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 8),
@@ -82,10 +86,10 @@ class FeaturedCell: UICollectionViewCell {
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             priceLabel.trailingAnchor.constraint(equalTo: addToCartButton.leadingAnchor, constant: -8),
             
-            addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            addToCartButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            addToCartButton.widthAnchor.constraint(equalToConstant: 24),
-            addToCartButton.heightAnchor.constraint(equalToConstant: 24)
+            addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            addToCartButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            addToCartButton.widthAnchor.constraint(equalToConstant: 45),
+            addToCartButton.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
     

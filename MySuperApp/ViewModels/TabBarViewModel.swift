@@ -2,7 +2,7 @@ import UIKit
 
 class TabBarViewModel: ObservableObject {
     
-    func updateTotal() -> Int64 {
+    func updateTotal() -> Int16 {
         let cartItems = CoreDataManager.shared.fetchCartItems()
         let _ = cartItems.map { cartItem in
             return Product(

@@ -51,6 +51,8 @@ class CartItemCell: UITableViewCell {
         button.tintColor = .red
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentHorizontalAlignment = .center
+           button.contentVerticalAlignment = .center
         return button
     }()
     
@@ -61,6 +63,8 @@ class CartItemCell: UITableViewCell {
         button.tintColor = .green
         button.isUserInteractionEnabled = true
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentHorizontalAlignment = .center
+        button.contentVerticalAlignment = .center
         return button
     }()
     
@@ -68,6 +72,7 @@ class CartItemCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         return label
     }()
     
@@ -81,10 +86,17 @@ class CartItemCell: UITableViewCell {
         addActions()
         contentView.layer.borderColor = UIColor.black.cgColor
         contentView.layer.borderWidth = 1
+        self.selectionStyle = .none
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+            self.selectionStyle = .none
+        }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 0, left: 0, bottom: 10, right: 0))
     }
     
     private func setupUI() {
@@ -98,28 +110,28 @@ class CartItemCell: UITableViewCell {
         countControlView.addSubview(incrementButton)
       
         NSLayoutConstraint.activate([
-            productImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            productImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            productImageView.widthAnchor.constraint(equalToConstant: 80),
+            productImageView.widthAnchor.constraint(equalToConstant: 100),
             productImageView.heightAnchor.constraint(equalToConstant: 80),
             
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 8),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
             priceLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 8),
             priceLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 16),
             priceLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
             
-            removeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 12),
-            removeButton.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 20),
-            removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            removeButton.topAnchor.constraint(equalTo: priceLabel.bottomAnchor, constant: 8),
+            removeButton.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 40),
+            removeButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
             removeButton.heightAnchor.constraint(equalToConstant: 30),
             
-            countControlView.topAnchor.constraint(equalTo: removeButton.bottomAnchor, constant: 12),
-            countControlView.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 12),
-            countControlView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            countControlView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            countControlView.topAnchor.constraint(equalTo: removeButton.bottomAnchor, constant: 8),
+            countControlView.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 40),
+            countControlView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
+            countControlView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
             countControlView.heightAnchor.constraint(equalToConstant: 30),
             
             decrementButton.leadingAnchor.constraint(equalTo: countControlView.leadingAnchor),
@@ -129,6 +141,7 @@ class CartItemCell: UITableViewCell {
             
             quantityLabel.centerYAnchor.constraint(equalTo: countControlView.centerYAnchor),
             quantityLabel.leadingAnchor.constraint(equalTo: decrementButton.trailingAnchor, constant: 20),
+            quantityLabel.widthAnchor.constraint(equalToConstant: 40),
             
             incrementButton.leadingAnchor.constraint(equalTo: quantityLabel.trailingAnchor, constant: 20),
             incrementButton.centerYAnchor.constraint(equalTo: countControlView.centerYAnchor),

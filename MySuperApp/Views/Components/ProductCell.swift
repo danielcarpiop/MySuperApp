@@ -67,11 +67,11 @@ class ProductCell: UICollectionViewCell {
             priceLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
             priceLabel.centerYAnchor.constraint(equalTo: addToCartButton.centerYAnchor),
             
-            addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
+            addToCartButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
             addToCartButton.centerYAnchor.constraint(equalTo: priceLabel.centerYAnchor),
             addToCartButton.widthAnchor.constraint(equalToConstant: 24),
             addToCartButton.heightAnchor.constraint(equalToConstant: 24),
-            addToCartButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+            addToCartButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2)
         ])
     }
     
