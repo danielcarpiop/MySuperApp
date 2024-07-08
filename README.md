@@ -17,6 +17,7 @@ MySuperApp is an iOS application designed to showcase a collection of products w
 - **Localization**: Support multiple languages.
 - **Search Functionality**: Add a search bar to allow users to search for products.
 - **Push Notifications**: Notify users about new products, discounts, and promotions.
+- **Refresh and Loading**: Add loadingView and fix minor reload and refresh gitches.
 
 ## Requirements
 
