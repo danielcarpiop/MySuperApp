@@ -1,17 +1,14 @@
 import UIKit
 
 class AppCoordinator {
-    private let window: UIWindow
-    private let tabBarCoordinator: TabBarCoordinator
-    
-    init(window: UIWindow) {
-        self.window = window
-        self.tabBarCoordinator = TabBarCoordinator()
+    private var navigationController: UINavigationController
+
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
-    
+
     func start() {
-        window.rootViewController = tabBarCoordinator.tabBarController
-        window.makeKeyAndVisible()
+        let tabCoordinator = TabBarCoordinator(navigationController: navigationController)
+        tabCoordinator.start()
     }
 }
-
