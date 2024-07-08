@@ -1,8 +1,7 @@
 import UIKit
-import SwiftUI
 
-class FeaturedProductCell: UICollectionViewCell {
-    static let identifier = "FeaturedProductCell"
+class FeaturedCell: UICollectionViewCell {
+    static let identifier = "FeaturedCell"
     
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
@@ -41,9 +40,13 @@ class FeaturedProductCell: UICollectionViewCell {
         return button
     }()
     
+    var addProduct: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         setupCell()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -86,8 +89,13 @@ class FeaturedProductCell: UICollectionViewCell {
         ])
     }
     
+    @objc private func buttonTapped() {
+        addProduct?()
+        NotificationCenter.default.post(name: .badgetUpdated, object: nil)
+    }
+    
     func configure(product: Product) {
-        productImageView.image = UIImage(named: product.image)
+        productImageView.loadImage(from: product.image)
         titleLabel.text = product.title
         priceLabel.text = "$\(product.price)"
     }

@@ -80,13 +80,13 @@ class ProductDetailViewController: UIViewController {
         super.viewWillAppear(animated)
         updatePreferredContentSize()
     }
-
+    
     private func updatePreferredContentSize() {
         let targetSize = CGSize(width: view.bounds.width, height: UIView.layoutFittingCompressedSize.height)
         let size = view.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
         preferredContentSize = CGSize(width: size.width, height: size.height + 100)
     }
-
+    
     
     private func setupUI() {
         view.addSubview(imageView)
@@ -147,9 +147,7 @@ class ProductDetailViewController: UIViewController {
         titleLabel.text = viewModel.product.title
         priceLabel.text = "$\(viewModel.product.price)"
         descriptionLabel.text = viewModel.product.description
-        if let url = URL(string: viewModel.product.image) {
-            loadImage(from: url, into: imageView)
-        }
+        imageView.loadImage(from: viewModel.product.image)
         updateStars(rating: viewModel.product.rating)
     }
     
@@ -161,14 +159,12 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    private func loadImage(from url: URL, into imageView: UIImageView) {
-    }
-    
     @objc private func dismissView() {
         dismiss(animated: true, completion: nil)
     }
     
     @objc private func addToCart() {
-           viewModel?.addToCart()
-       }
+        viewModel?.addToCart()
+        NotificationCenter.default.post(name: .badgetUpdated, object: nil)
+    }
 }

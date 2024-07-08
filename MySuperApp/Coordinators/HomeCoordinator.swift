@@ -48,7 +48,7 @@ extension HomeCoordinator: HomeVCDelegate {
 }
 
 extension HomeCoordinator: CategoriesCoordinatorDelegate {
-    func filterCategory(category: String) {
+    func filterCategory(category: CategoriesEnum) {
         homeViewController.filterCategory(category: category)
     }
     

@@ -2,18 +2,20 @@ import UIKit
 
 class TabBarCoordinator: NSObject {
     private var navigationController: UINavigationController
-    private var tabBarController = UITabBarController()
+    private var tabBarViewController: TabBarViewController
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.tabBarViewController = TabBarViewController()
+        self.tabBarViewController.viewModel = TabBarViewModel()
     }
     
     func start() {
-        tabBarController.setViewControllers(prepareTabsController(), animated: true)
-        tabBarController.tabBar.isTranslucent = false
-        tabBarController.tabBar.backgroundColor = .white
+        tabBarViewController.setViewControllers(prepareTabsController(), animated: true)
+        tabBarViewController.tabBar.isTranslucent = false
+        tabBarViewController.tabBar.backgroundColor = .white
         
-        navigationController.viewControllers = [tabBarController]
+        navigationController.viewControllers = [tabBarViewController]
         navigationController.setNavigationBarHidden(true, animated: false)
     }
     

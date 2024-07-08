@@ -16,7 +16,7 @@ class CartViewModel: ObservableObject {
     func fetchCartItems() {
         cartItems = CoreDataManager.shared.fetchCartItems()
         cartItems.removeAll(where: { $0.title == nil })
-//        cartItems.forEach({ print($0 )})
+        cartItems = cartItems.sorted { $0.title ?? "" < $1.title ?? "" }
         self.products = cartItems.map { cartItem in
             return Product(
                 id: Int(cartItem.itemId),
@@ -32,10 +32,9 @@ class CartViewModel: ObservableObject {
         recalculateTotalAmount()
     }
     
-    func addProduct(product: Product) {
-        CoreDataManager.shared.addCartItem(product: product)
+    func addProduct(product: Product, isIncrement: Bool = true) {
+        CoreDataManager.shared.addCartItem(product: product, isIncrement: isIncrement)
         fetchCartItems()
-        
     }
     
     func removeProduct(at index: Int) {
@@ -44,24 +43,6 @@ class CartViewModel: ObservableObject {
         }
         CoreDataManager.shared.removeCartItem(cartItem: cartItems[index])
         fetchCartItems()
-    }
-    
-    func incrementQuantity(of product: Product) {
-        if let index = products.firstIndex(where: { $0.id == product.id }) {
-            let cartItem = CoreDataManager.shared.fetchCartItems()[index]
-            CoreDataManager.shared.updateCartItem(cartItem: cartItem, quantity: cartItem.quantity + 1)
-            fetchCartItems()
-        }
-    }
-    
-    func decrementQuantity(of product: Product) {
-        if let index = products.firstIndex(where: { $0.id == product.id }) {
-            let cartItem = CoreDataManager.shared.fetchCartItems()[index]
-            if cartItem.quantity > 1 {
-                CoreDataManager.shared.updateCartItem(cartItem: cartItem, quantity: cartItem.quantity - 1)
-                fetchCartItems()
-            }
-        }
     }
     
     private func recalculateTotalAmount() {

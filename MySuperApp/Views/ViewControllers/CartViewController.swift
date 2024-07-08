@@ -26,6 +26,12 @@ class CartViewController: UIViewController {
         setupTotalAmountView()
         bindViewModel()
         view.backgroundColor = .white
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel?.fetchCartItems()
     }
     
     private func setupNavigationBar() {
@@ -44,11 +50,13 @@ class CartViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartItemCell.self, forCellReuseIdentifier: CartItemCell.identifier)
+        tableView.separatorStyle = .none
+
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -150)
         ])
     }
@@ -115,6 +123,10 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         return viewModel?.products.count ?? 0
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        150
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel, let cell = tableView.dequeueReusableCell(withIdentifier: CartItemCell.identifier, for: indexPath) as? CartItemCell else {
             return UITableViewCell()
@@ -122,26 +134,17 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         let product = viewModel.products[indexPath.row]
         cell.configure(with: product)
         
-        cell.removeSubject
-            .sink { [weak self] in
-                guard let self = self else { return }
-                self.viewModel?.removeProduct(at: indexPath.row)
-            }
-            .store(in: &cancellables)
+        cell.removeProduct = { [weak self] in
+            self?.viewModel?.removeProduct(at: indexPath.row)
+        }
         
-        cell.incrementSubject
-            .sink { [weak self] in
-                guard let self = self else { return }
-                self.viewModel?.incrementQuantity(of: product)
-            }
-            .store(in: &cancellables)
+        cell.incrementProduct = { [weak self] in
+            self?.viewModel?.addProduct(product: product)
+        }
         
-        cell.decrementSubject
-            .sink { [weak self] in
-                guard let self = self else { return }
-                self.viewModel?.decrementQuantity(of: product)
-            }
-            .store(in: &cancellables)
+        cell.decrementProduct = { [weak self] in
+            self?.viewModel?.addProduct(product: product, isIncrement: false)
+        }
         
         return cell
     }

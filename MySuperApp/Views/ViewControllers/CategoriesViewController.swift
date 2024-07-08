@@ -2,7 +2,7 @@ import UIKit
 import Combine
 
 protocol CategoryVCDelegate: AnyObject {
-    func filterCategory(category: String)
+    func filterCategory(category: CategoriesEnum)
 }
 
 class CategoriesViewController: UIViewController {
@@ -95,12 +95,13 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        cell.textLabel?.text = viewModel?.categories[indexPath.row]
+        cell.textLabel?.text = viewModel?.categories[indexPath.row].getName
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.filterCategory(category: viewModel?.categories[indexPath.row] ?? "")
+        guard let viewModel else { return }
+        delegate?.filterCategory(category: viewModel.categories[indexPath.row])
         dismiss(animated: true)
     }
 }

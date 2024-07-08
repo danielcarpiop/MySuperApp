@@ -3,7 +3,7 @@ import Combine
 
 class CategoriesViewModel {
     private let productService: ProductAPI
-    @Published var categories: [String] = []
+    @Published var categories: [CategoriesEnum] = []
     private var cancellables = Set<AnyCancellable>()
     
     init(productService: ProductAPI) {
@@ -14,10 +14,14 @@ class CategoriesViewModel {
         productService.getCategories()
             .sink(receiveCompletion: { completion in
                 if case let .failure(error) = completion {
-                    print("Error fetching categories: \(error)")
+                    debugPrint("Error fetching categories: \(error)")
                 }
             }, receiveValue: { [weak self] categories in
-                self?.categories = categories
+                var newCategories = [CategoriesEnum.all]
+                categories.forEach {
+                    newCategories.append(CategoriesEnum.category(name: $0))
+                }
+                self?.categories = newCategories
             })
             .store(in: &cancellables)
     }

@@ -32,9 +32,12 @@ class ProductCell: UICollectionViewCell {
         return button
     }()
     
+    var addProduct: (() -> Void)?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
+        addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
@@ -72,8 +75,13 @@ class ProductCell: UICollectionViewCell {
         ])
     }
     
+    @objc private func buttonTapped() {
+        addProduct?()
+        NotificationCenter.default.post(name: .badgetUpdated, object: nil)
+    }
+    
     func configure(product: Product) {
-        productImageView.image = UIImage(named: product.image)
+        productImageView.loadImage(from: product.image)
         titleLabel.text = product.title
         priceLabel.text = "$\(product.price)"
     }

@@ -6,8 +6,6 @@ protocol HomeVCDelegate: AnyObject {
     func showProductDetail(product: Product)
 }
 
-
-
 class HomeViewController: UIViewController {
     var delegate: HomeVCDelegate?
     private var collectionView: UICollectionView?
@@ -83,7 +81,7 @@ class HomeViewController: UIViewController {
         collectionView?.delegate = self
         collectionView?.dataSource = self
         collectionView?.register(ProductCell.self, forCellWithReuseIdentifier: ProductCell.identifier)
-        collectionView?.register(FeaturedProductCell.self, forCellWithReuseIdentifier: FeaturedProductCell.identifier)
+        collectionView?.register(FeaturedCell.self, forCellWithReuseIdentifier: FeaturedCell.identifier)
         
         if let collectionView = collectionView {
             view.addSubview(collectionView)
@@ -110,7 +108,7 @@ class HomeViewController: UIViewController {
     private func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             
-            let featuredItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
+            let featuredItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(180))
             let featuredItem = NSCollectionLayoutItem(layoutSize: featuredItemSize)
             
             let normalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(150))
@@ -122,7 +120,7 @@ class HomeViewController: UIViewController {
             
             let section: NSCollectionLayoutSection
             if sectionIndex == 0 {
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(250))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(180))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [featuredItem])
                 section = NSCollectionLayoutSection(group: group)
             } else {
@@ -130,7 +128,7 @@ class HomeViewController: UIViewController {
             }
             
             section.interGroupSpacing = 10
-            section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20)
             
             return section
         }
@@ -158,11 +156,14 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedProductCell.identifier, for: indexPath) as? FeaturedProductCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeaturedCell.identifier, for: indexPath) as? FeaturedCell else {
                 return UICollectionViewCell()
             }
             if let product = viewModel?.products.first {
                 cell.configure(product: product)
+                cell.addProduct = { [weak self] in
+                    self?.viewModel?.addProduct(product: product)
+                }
             }
             return cell
         } else {
@@ -171,6 +172,9 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             }
             if let product = viewModel?.products[indexPath.item + 1] {
                 cell.configure(product: product)
+                cell.addProduct = { [weak self] in
+                    self?.viewModel?.addProduct(product: product)
+                }
             }
             return cell
         }
@@ -191,7 +195,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension HomeViewController {
-    func filterCategory(category: String) {
-        viewModel?.filterCategory(category: category)
+    func filterCategory(category: CategoriesEnum) {
+        switch category {
+        case .all:
+            viewModel?.fetchProducts()
+        case .category(let name):
+            viewModel?.filterCategory(category: name)
+        }
+       
     }
 }

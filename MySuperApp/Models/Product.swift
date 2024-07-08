@@ -25,3 +25,5 @@ struct Rating: Codable, Equatable {
     let rate: Double
     let count: Int
 }
+
+

@@ -1,7 +1,7 @@
 import UIKit
 
 protocol CategoriesCoordinatorDelegate: AnyObject {
-    func filterCategory(category: String)
+    func filterCategory(category: CategoriesEnum)
 }
 
 class CategoriesCoordinator {
@@ -26,7 +26,7 @@ class CategoriesCoordinator {
 }
 
 extension CategoriesCoordinator: CategoryVCDelegate {
-    func filterCategory(category: String) {
+    func filterCategory(category: CategoriesEnum) {
         delegate?.filterCategory(category: category)
     }
 }

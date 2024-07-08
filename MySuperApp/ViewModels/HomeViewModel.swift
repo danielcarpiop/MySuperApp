@@ -17,7 +17,7 @@ class HomeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Error fetching products: \(error)")
+                    debugPrint("Error fetching products: \(error)")
                 case .finished:
                     break
                 }
@@ -35,7 +35,7 @@ class HomeViewModel: ObservableObject {
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure(let error):
-                    print("Error fetching products: \(error)")
+                    debugPrint("Error fetching products: \(error)")
                 case .finished:
                     break
                 }
@@ -56,6 +56,10 @@ class HomeViewModel: ObservableObject {
         }
         
         return orderedProducts
+    }
+    
+    func addProduct(product: Product) {
+        CoreDataManager.shared.addCartItem(product: product)
     }
 }
 

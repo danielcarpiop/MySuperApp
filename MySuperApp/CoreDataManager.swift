@@ -34,16 +34,20 @@ class CoreDataManager {
         do {
             return try context.fetch(fetchRequest)
         } catch {
-            print("Failed to fetch CartItems: \(error)")
+            debugPrint("Failed to fetch CartItems: \(error)")
             return []
         }
     }
 
-    func addCartItem(product: Product) {
+    func addCartItem(product: Product, isIncrement: Bool = true) {
         let context = persistentContainer.viewContext
         let cartItem = CartItem(context: context)
         if let item = fetchCartItems().first(where: { $0.title == product.title }) {
-            updateCartItem(cartItem: item, quantity: item.quantity + 1)
+            if isIncrement {
+                updateCartItem(cartItem: item, quantity: item.quantity + 1)
+            } else if item.quantity > 1 {
+                updateCartItem(cartItem: item, quantity: item.quantity - 1)
+            }
         } else {
             cartItem.itemId = Int64(product.id)
             cartItem.title = product.title

@@ -35,7 +35,7 @@ class URLFactory {
                 let data = try JSONSerialization.data(withJSONObject: body)
                 request.httpBody = data
             } catch {
-                print(error)
+                debugPrint(error)
             }
         }
         return request
