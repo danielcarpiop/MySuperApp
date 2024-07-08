@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  MySuperApp
-//
-//  Created by Daniel Carpio on 05-07-24.
-//
-
 import UIKit
 import CoreData
 

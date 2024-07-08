@@ -116,8 +116,7 @@ class CartViewController: UIViewController {
         tableView.register(CartItemCell.self, forCellReuseIdentifier: CartItemCell.identifier)
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        tableView.layer.cornerRadius = 15
-        tableView.clipsToBounds = false
+        tableView.clipsToBounds = true
         
         
         NSLayoutConstraint.activate([
