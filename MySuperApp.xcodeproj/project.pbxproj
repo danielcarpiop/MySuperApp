@@ -47,6 +47,7 @@
 		37C19B142C3B744100BDB68B /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C19B132C3B744100BDB68B /* TabBarViewModel.swift */; };
 		37C19B162C3B78B500BDB68B /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C19B152C3B78B500BDB68B /* Notification.swift */; };
 		37C19B182C3B7DD200BDB68B /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C19B172C3B7DD200BDB68B /* TabBarViewController.swift */; };
+		37C19B232C3D81B000BDB68B /* UIButton+Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C19B222C3D81B000BDB68B /* UIButton+Animation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +112,7 @@
 		37C19B132C3B744100BDB68B /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 		37C19B152C3B78B500BDB68B /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		37C19B172C3B7DD200BDB68B /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		37C19B222C3D81B000BDB68B /* UIButton+Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Animation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				3745CAC22C38635800C009EF /* URLSession+Networking.swift */,
 				37C19B0D2C3B446600BDB68B /* UIImageView+URLSession.swift */,
 				37C19B152C3B78B500BDB68B /* Notification.swift */,
+				37C19B222C3D81B000BDB68B /* UIButton+Animation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				376D73002C385FA300A1382C /* CartModel.xcdatamodeld in Sources */,
 				37BD3C392C38DB42002C4A9F /* CartViewController.swift in Sources */,
 				37BD3C482C39F410002C4A9F /* CategoriesViewModel.swift in Sources */,
+				37C19B232C3D81B000BDB68B /* UIButton+Animation.swift in Sources */,
 				37BD3C242C386860002C4A9F /* ProductService.swift in Sources */,
 				37BD3C262C3868EC002C4A9F /* ProductAPI.swift in Sources */,
 				376D72F62C385FA300A1382C /* AppDelegate.swift in Sources */,

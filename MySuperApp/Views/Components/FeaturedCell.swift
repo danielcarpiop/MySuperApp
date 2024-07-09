@@ -50,6 +50,7 @@ class FeaturedCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        addToCartButton.addAnimation()
         setupCell()
     }
     

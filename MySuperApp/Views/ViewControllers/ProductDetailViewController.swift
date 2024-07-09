@@ -74,6 +74,7 @@ class ProductDetailViewController: UIViewController {
         
         dismissButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         addButton.addTarget(self, action: #selector(addToCart), for: .touchUpInside)
+        addButton.addAnimation()
     }
     
     override func viewWillAppear(_ animated: Bool) {

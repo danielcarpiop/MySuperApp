@@ -182,6 +182,4 @@ class CartItemCell: UITableViewCell {
         guard let quantity = product.quantity else { return }
         quantityLabel.text = String(describing: quantity)
     }
-    
-    
 }

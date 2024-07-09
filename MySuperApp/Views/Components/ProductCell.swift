@@ -38,6 +38,7 @@ class ProductCell: UICollectionViewCell {
         super.init(frame: frame)
         setupCell()
         addToCartButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        addToCartButton.addAnimation()
     }
     
     required init?(coder: NSCoder) {
